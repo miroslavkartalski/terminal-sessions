@@ -40,6 +40,18 @@ Terminal Sessions is the small utility that makes Terminal feel less like a blac
 
 ---
 
+## Your data never leaves your Mac
+
+Terminal Sessions works entirely on your computer. It doesn't connect to the internet, doesn't have a server, and doesn't collect anything.
+
+The only thing it does is read the names and locations of your open Terminal windows — the same information you can already see in Terminal's title bar. It uses that to show you the list in the menu bar.
+
+No account required. No analytics. No telemetry. Nothing is stored anywhere except on your own machine, in a local file that only you can access.
+
+If you close the app, everything stops. It's just a small utility that watches your Terminal while it's running — nothing more.
+
+---
+
 ## Screenshots
 
 *Coming soon*
