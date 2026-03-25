@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         guard let button = statusItem.button else { return }
-        let img = NSImage(systemSymbolName: "terminal", accessibilityDescription: "Terminal Archiver")
+        let img = NSImage(systemSymbolName: "terminal", accessibilityDescription: "Terminal Sessions")
         img?.isTemplate = true
         button.image = img
         button.action = #selector(togglePopover)

@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA00BB0000000000000000AA /* Terminal Archiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal Archiver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00BB0000000000000000AA /* Terminal Sessions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal Sessions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA00BB0100000000000000AA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		AA00BB0200000000000000AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA00BB0300000000000000AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,12 +44,12 @@
 		AA00AA0000000000000000AA /* main group */ = {
 			isa = PBXGroup;
 			children = (
-				AA00AA0100000000000000AA /* Terminal Archiver */,
+				AA00AA0100000000000000AA /* Terminal Sessions */,
 				AA00AA0200000000000000AA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AA00AA0100000000000000AA /* Terminal Archiver */ = {
+		AA00AA0100000000000000AA /* Terminal Sessions */ = {
 			isa = PBXGroup;
 			children = (
 				AA00BB0100000000000000AA /* App.swift */,
@@ -62,13 +62,13 @@
 				AA00BB0700000000000000AA /* Assets.xcassets */,
 				AA00BB0800000000000000AA /* Info.plist */,
 			);
-			path = "Terminal Archiver";
+			path = "Terminal Sessions";
 			sourceTree = "<group>";
 		};
 		AA00AA0200000000000000AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA00BB0000000000000000AA /* Terminal Archiver.app */,
+				AA00BB0000000000000000AA /* Terminal Sessions.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA00000000000000000000AA /* Terminal Archiver */ = {
+		AA00000000000000000000AA /* Terminal Sessions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA00FF0100000000000000AA /* Build configuration list for PBXNativeTarget "Terminal Archiver" */;
+			buildConfigurationList = AA00FF0100000000000000AA /* Build configuration list for PBXNativeTarget "Terminal Sessions" */;
 			buildPhases = (
 				AA00EE0100000000000000AA /* Sources */,
 				AA00EE0200000000000000AA /* Frameworks */,
@@ -88,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = "Terminal Archiver";
-			productName = "Terminal Archiver";
-			productReference = AA00BB0000000000000000AA /* Terminal Archiver.app */;
+			name = "Terminal Sessions";
+			productName = "Terminal Sessions";
+			productReference = AA00BB0000000000000000AA /* Terminal Sessions.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -108,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AA00FF0200000000000000AA /* Build configuration list for PBXProject "Terminal Archiver" */;
+			buildConfigurationList = AA00FF0200000000000000AA /* Build configuration list for PBXProject "Terminal Sessions" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA00000000000000000000AA /* Terminal Archiver */,
+				AA00000000000000000000AA /* Terminal Sessions */,
 			);
 		};
 /* End PBXProject section */
@@ -164,7 +164,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Terminal Archiver/Info.plist";
+				INFOPLIST_FILE = "Terminal Sessions/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -187,7 +187,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Terminal Archiver/Info.plist";
+				INFOPLIST_FILE = "Terminal Sessions/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -295,7 +295,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA00FF0100000000000000AA /* Build configuration list for PBXNativeTarget "Terminal Archiver" */ = {
+		AA00FF0100000000000000AA /* Build configuration list for PBXNativeTarget "Terminal Sessions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA00DD0100000000000000AA /* Debug */,
@@ -304,7 +304,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA00FF0200000000000000AA /* Build configuration list for PBXProject "Terminal Archiver" */ = {
+		AA00FF0200000000000000AA /* Build configuration list for PBXProject "Terminal Sessions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA00DD0300000000000000AA /* Debug */,
