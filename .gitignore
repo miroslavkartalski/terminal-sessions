@@ -24,3 +24,4 @@ build/
 Pods/
 .build/
 release-build/
+Icon*.png
