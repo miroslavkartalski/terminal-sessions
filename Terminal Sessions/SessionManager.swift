@@ -43,7 +43,32 @@ class SessionManager: ObservableObject {
     }
 
     func isBookmarked(path: String) -> Bool {
-        bookmarks.contains { $0.path == path }
+        bookmarks.contains { matchesBookmark($0, path: path) }
+    }
+
+    /// Fuzzy match: exact, OR bookmark is a bare fragment (no slash) that the
+    /// full path ends with — handles stale bookmarks saved before a path-capture bug fix.
+    private func matchesBookmark(_ bookmark: Bookmark, path: String) -> Bool {
+        if bookmark.path == path { return true }
+        guard !bookmark.path.contains("/") else { return false }
+        return path.hasSuffix("/" + bookmark.path) || path.hasSuffix(" " + bookmark.path)
+    }
+
+    /// Called each refresh: upgrades any fragment-only bookmark paths to the
+    /// full resolved path seen in the current live tabs.
+    func migrateBookmarkPaths(liveTabs: [LiveTerminalTab]) {
+        var changed = false
+        for i in bookmarks.indices {
+            guard !bookmarks[i].path.contains("/") else { continue }
+            if let fullPath = liveTabs.first(where: { tab in
+                guard let p = tab.path else { return false }
+                return matchesBookmark(bookmarks[i], path: p)
+            })?.path {
+                bookmarks[i].path = fullPath
+                changed = true
+            }
+        }
+        if changed { saveBookmarks() }
     }
 
     private func saveBookmarks() {

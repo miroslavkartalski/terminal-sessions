@@ -174,6 +174,8 @@ struct ContentView: View {
                     lastPeriodicSave = Date()
                 }
 
+                let liveTabs = windows.flatMap { $0.tabs }
+                manager.migrateBookmarkPaths(liveTabs: liveTabs)
                 liveWindows = windows
                 previousTabCount = currentCount
             }
@@ -350,7 +352,6 @@ struct BookmarksTabView: View {
                 } else {
                     ForEach(manager.bookmarks) { bookmark in
                         BookmarkRow(bookmark: bookmark)
-                        Divider().overlay(DS.divider).padding(.horizontal, DS.space16)
                     }
                 }
             }
@@ -366,32 +367,39 @@ struct BookmarkRow: View {
 
     var body: some View {
         HStack(spacing: DS.space12) {
-            Image(systemName: "bookmark.fill")
-                .font(.system(size: 13))
+            // Same icon style as NowTabRow — folder for bookmarks
+            Image(systemName: "folder.fill")
+                .font(.system(size: 14))
                 .foregroundStyle(DS.folderBlue)
                 .frame(width: 18)
                 .padding(.leading, DS.space16)
 
+            // Tap to open in Terminal
             Button(action: { openBookmark() }) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(bookmark.name)
+                    Text(DS.truncated(bookmark.name))
                         .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(DS.textPrimary).lineLimit(1)
+                        .foregroundStyle(DS.textPrimary)
+                        .lineLimit(1)
                     Text(bookmark.abbreviatedPath)
-                        .font(.system(size: 11)).foregroundStyle(DS.textTertiary).lineLimit(1)
+                        .font(.system(size: 11))
+                        .foregroundStyle(DS.textTertiary)
+                        .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            .help(bookmark.name)
 
-            HStack(spacing: DS.space10) {
-                Button(action: { manager.removeBookmark(id: bookmark.id) }) {
-                    Image(systemName: "bookmark.slash")
-                        .font(.system(size: 11)).foregroundStyle(DS.textTertiary)
-                }
-                .buttonStyle(.plain).help("Remove bookmark")
+            // Remove button — visible on hover
+            Button(action: { manager.removeBookmark(id: bookmark.id) }) {
+                Image(systemName: "bookmark.slash")
+                    .font(.system(size: 12))
+                    .foregroundStyle(DS.textTertiary)
             }
+            .buttonStyle(.plain)
+            .help("Remove bookmark")
             .opacity(isHovering ? 1 : 0)
             .padding(.trailing, DS.space16)
         }
