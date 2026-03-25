@@ -32,9 +32,11 @@ Terminal Sessions is the small utility that makes Terminal feel less like a blac
 1. Go to [Releases](https://github.com/miroslavkartalski/terminal-sessions/releases)
 2. Download `Terminal.Sessions.v1.0.0.zip`
 3. Unzip it and drag **Terminal Sessions.app** to your `/Applications` folder
-4. Open it — it lives in your menu bar
+4. **Right-click the app → Open** (do not double-click)
+5. Click **Open** in the dialog that appears — macOS remembers this and won't ask again
+6. The app will appear in your menu bar
 
-> **First launch:** macOS may show a security warning because the app isn't notarized yet. Right-click the app → **Open** to get past it. This is normal for indie Mac apps.
+> **Why the security warning?** macOS blocks apps that aren't notarized by Apple. This is standard for indie apps distributed outside the App Store. Right-clicking → Open bypasses it safely. The app is fully open source — you can review every line of code in this repo.
 
 **Requirements:** macOS 13 Ventura or later
 
