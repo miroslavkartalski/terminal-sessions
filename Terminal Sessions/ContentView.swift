@@ -54,7 +54,7 @@ struct ContentView: View {
             Group {
                 switch activeTab {
                 case .now:       NowTabView(liveWindows: liveWindows)
-                case .bookmarks: BookmarksTabView()
+                case .bookmarks: BookmarksTabView(liveWindows: liveWindows)
                 case .history:   HistoryTabView()
                 }
             }
@@ -334,6 +334,9 @@ struct NowTabRow: View {
 
 struct BookmarksTabView: View {
     @EnvironmentObject var manager: SessionManager
+    let liveWindows: [LiveTerminalWindow]
+
+    private var liveTabs: [LiveTerminalTab] { liveWindows.flatMap { $0.tabs } }
 
     var body: some View {
         ScrollView {
@@ -351,7 +354,7 @@ struct BookmarksTabView: View {
                     .frame(maxWidth: .infinity)
                 } else {
                     ForEach(manager.bookmarks) { bookmark in
-                        BookmarkRow(bookmark: bookmark)
+                        BookmarkRow(bookmark: bookmark, aiTool: liveTabs.first { $0.path == bookmark.path }?.aiTool)
                     }
                 }
             }
@@ -363,16 +366,23 @@ struct BookmarksTabView: View {
 struct BookmarkRow: View {
     @EnvironmentObject var manager: SessionManager
     let bookmark: Bookmark
+    var aiTool: AITool? = nil
     @State private var isHovering = false
 
     var body: some View {
         HStack(spacing: DS.space12) {
-            // Same icon style as NowTabRow — folder for bookmarks
-            Image(systemName: "folder.fill")
-                .font(.system(size: 14))
-                .foregroundStyle(DS.folderBlue)
-                .frame(width: 18)
-                .padding(.leading, DS.space16)
+            // Show AI tool icon if the terminal is currently open, otherwise folder
+            Group {
+                if let tool = aiTool {
+                    AIToolIcon(tool: tool, size: 16)
+                } else {
+                    Image(systemName: "folder.fill")
+                        .font(.system(size: 14))
+                        .foregroundStyle(DS.folderBlue)
+                }
+            }
+            .frame(width: 18)
+            .padding(.leading, DS.space16)
 
             // Tap to open in Terminal
             Button(action: { openBookmark() }) {
