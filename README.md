@@ -62,9 +62,9 @@ If you close the app, everything stops. It's just a small utility that watches y
 
 [Miro Kartalski](https://mirokartalski.com) — product designer who vibe codes.
 
-If this saves you even 10 minutes of confusion, consider buying me a coffee.
+If this saves you even 10 minutes of confusion, consider supporting the work.
 
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-mirokartalski-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/mirokartalski)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/mirokartalski)
 
 ---
 
