@@ -1,5 +1,12 @@
 import Foundation
 
+// MARK: - Process State
+
+enum ProcessState {
+    case idle   // shell is foreground — nothing running
+    case active // non-shell process is foreground — AI is doing something
+}
+
 // MARK: - Live (current open Terminal windows)
 
 struct LiveTerminalWindow: Identifiable {
@@ -14,6 +21,7 @@ struct LiveTerminalTab: Identifiable {
     var path: String?
     var tty: String
     var windowTitle: String? // full Terminal.app window title bar (richer context)
+    var processState: ProcessState = .idle
 
     /// AI tool detected from either the tab title or the full window title.
     var aiTool: AITool? {

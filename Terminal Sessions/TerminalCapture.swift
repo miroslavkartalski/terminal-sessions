@@ -45,9 +45,13 @@ enum TerminalCapture {
                 ? parts[3...].joined(separator: "|||").trimmingCharacters(in: .whitespaces)
                 : ""
             let path = getWorkingDir(forTTY: tty)
+            let state = getProcessState(forTTY: tty,
+                                        windowTitle: winTitle.isEmpty ? nil : winTitle,
+                                        tabTitle: title.isEmpty ? nil : title)
 
             let tab = LiveTerminalTab(id: tty, title: title, path: path, tty: tty,
-                                     windowTitle: winTitle.isEmpty ? nil : winTitle)
+                                     windowTitle: winTitle.isEmpty ? nil : winTitle,
+                                     processState: state)
             windowMap[windowIdx, default: []].append(tab)
         }
 
@@ -93,6 +97,49 @@ enum TerminalCapture {
             .replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "\"", with: "\\\"")
         return "\"\(escaped)\""
+    }
+
+    /// Determines whether the TTY is idle or active.
+    ///
+    /// Claude Code sets the tab custom title starting with a status character:
+    ///   ✳ (U+2733)       = idle, waiting for user input
+    ///   · (U+00B7)       = thinking / tool use in progress
+    ///   braille U+2800–28FF = spinning / actively processing
+    ///
+    /// The window title (name of w) prepends the directory, so the status char
+    /// appears after the first " — " separator: "Dir — · Task — processes"
+    /// We check both the raw tab title AND the post-separator part of the window title.
+    static func getProcessState(forTTY tty: String, windowTitle: String?, tabTitle: String?) -> ProcessState {
+        // ✳ U+2733 = explicit idle marker
+        let idleMarker: UInt32 = 0x2733
+
+        func statusScalar(in s: String) -> UInt32? {
+            // Check character after first " — " (window title format)
+            if let r = s.range(of: " — ") {
+                if let v = s[r.upperBound...].unicodeScalars.first?.value { return v }
+            }
+            // Fallback: first character (tab custom title format)
+            return s.unicodeScalars.first?.value
+        }
+
+        for candidate in [tabTitle, windowTitle].compactMap({ $0 }) {
+            guard let sc = statusScalar(in: candidate) else { continue }
+            if sc == idleMarker { return .idle }                       // ✳ = explicitly idle
+            if sc >= 0x2800 && sc <= 0x28FF { return .active }        // braille spinner
+            if sc == 0x00B7 { return .active }                        // · middle dot = thinking
+        }
+
+        // Fallback: foreground process in R (running on CPU) state
+        let ttyShort = tty.hasPrefix("/dev/") ? String(tty.dropFirst(5)) : tty
+        let shells: Set<String> = ["zsh", "bash", "fish", "sh", "dash", "login"]
+        let output = run("ps -t \(ttyShort) -o stat=,comm= 2>/dev/null")
+        for line in output.components(separatedBy: .newlines) {
+            let parts = line.trimmingCharacters(in: .whitespaces).components(separatedBy: .whitespaces)
+            guard parts.count >= 2 else { continue }
+            let stat = parts[0], comm = URL(fileURLWithPath: parts[1]).lastPathComponent
+            if stat.contains("+") && stat.hasPrefix("R") && !shells.contains(comm) { return .active }
+        }
+        return .idle
     }
 
     static func getWorkingDir(forTTY tty: String) -> String? {

@@ -249,6 +249,29 @@ struct NowTabView: View {
     }
 }
 
+struct WorkingIndicator: View {
+    private let frames = ["⠋","⠙","⠹","⠸","⠼","⠴","⠦","⠧","⠇","⠏"]
+    @State private var frameIndex = 0
+    @State private var timer: Timer?
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Text(frames[frameIndex])
+                .font(.system(size: 12, design: .monospaced))
+                .foregroundStyle(Color.orange)
+            Text("Working")
+                .font(.system(size: 11))
+                .foregroundStyle(Color.orange)
+        }
+        .onAppear {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true) { _ in
+                frameIndex = (frameIndex + 1) % frames.count
+            }
+        }
+        .onDisappear { timer?.invalidate(); timer = nil }
+    }
+}
+
 struct NowTabRow: View {
     @EnvironmentObject var manager: SessionManager
     let tab: LiveTerminalTab
@@ -280,7 +303,8 @@ struct NowTabRow: View {
             // Text — tap to focus
             Button(action: { TerminalCapture.focusWindow(index: windowIndex) }) {
                 VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: DS.space8) {
+                    HStack(spacing: DS.space6) {
+                        if tab.processState == .active { WorkingIndicator() }
                         Text(DS.truncated(primaryLabel))
                             .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(DS.textPrimary)
