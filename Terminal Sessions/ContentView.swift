@@ -45,6 +45,11 @@ struct ContentView: View {
     @State private var previousTabCount = 0
     @State private var lastPeriodicSave = Date.distantPast
     @State private var isHoveringCredit = false
+    @State private var isHoveringUpdate = false
+
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -124,11 +129,25 @@ struct ContentView: View {
     // MARK: - Footer
 
     var footer: some View {
-        HStack {
+        HStack(spacing: DS.space6) {
             Text("\(liveWindows.flatMap { $0.tabs }.count) terminal\(liveWindows.flatMap { $0.tabs }.count == 1 ? "" : "s") open")
                 .font(.system(size: 11))
                 .foregroundStyle(DS.textTertiary)
             Spacer()
+            Text("v\(appVersion)")
+                .font(.system(size: 11))
+                .foregroundStyle(DS.textTertiary)
+            Button(action: { (NSApp.delegate as? AppDelegate)?.checkForUpdates() }) {
+                Image(systemName: "arrow.up.circle")
+                    .font(.system(size: 11))
+                    .foregroundStyle(isHoveringUpdate ? DS.folderBlue : DS.textTertiary)
+            }
+            .buttonStyle(.plain)
+            .onHover { isHoveringUpdate = $0 }
+            .help("Check for Updates")
+            Text("·")
+                .font(.system(size: 11))
+                .foregroundStyle(DS.textTertiary)
             Button(action: { NSWorkspace.shared.open(URL(string: "https://mirokartalski.com")!) }) {
                 Text("by Miro Kartalski")
                     .font(.system(size: 11))
