@@ -56,7 +56,7 @@ If you close the app, everything stops. It's just a small utility that watches y
 
 ## Screenshots
 
-*Coming soon*
+![Terminal Sessions](assets/screenshot.png)
 
 ---
 
