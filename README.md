@@ -1,5 +1,9 @@
 # Terminal Sessions
 
+![Terminal Sessions](assets/screenshot.png)
+
+---
+
 **A macOS menu bar app for designers who vibe code with AI.**
 
 If you've ever had 4 Terminal windows open and no idea which one is running Claude, which one crashed, or what directory you were even in — this is for you.
@@ -51,12 +55,6 @@ The only thing it does is read the names and locations of your open Terminal win
 No account required. No analytics. No telemetry. Nothing is stored anywhere except on your own machine, in a local file that only you can access.
 
 If you close the app, everything stops. It's just a small utility that watches your Terminal while it's running — nothing more.
-
----
-
-## Screenshots
-
-![Terminal Sessions](assets/screenshot.png)
 
 ---
 
