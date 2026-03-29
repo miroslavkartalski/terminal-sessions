@@ -7,6 +7,21 @@
         <link>https://github.com/miroslavkartalski/terminal-sessions</link>
         <description>Most recent changes to Terminal Sessions.</description>
         <language>en</language>
+        <item>
+            <title>Version 1.1</title>
+            <sparkle:releaseNotesLink>https://github.com/miroslavkartalski/terminal-sessions/releases/tag/v1.1</sparkle:releaseNotesLink>
+            <pubDate>Sun, 29 Mar 2026 18:50:13 +0000</pubDate>
+            <enclosure
+                url="https://github.com/miroslavkartalski/terminal-sessions/releases/download/v1.1/Terminal.Sessions.zip"
+                sparkle:version="1.1"
+                sparkle:shortVersionString="1.1"
+                length="1356834"
+                type="application/octet-stream"
+                sparkle:edSignature="sparkle:edSignature="gZaf5qs18FrV9g27mxhef77lyEdKc/5C7q8rercdSzPmPjfMtOAQhz+QprTiPfo+LXJP1OmeL5tN5k5N1zGmDQ==" length="1356834""
+            />
+        </item>
+
+
 
         <item>
             <title>Version 1.0</title>
